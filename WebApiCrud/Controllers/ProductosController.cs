@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApiCrud.Data.Interfaces;
 using WebApiCrud.Dtos;
@@ -8,7 +9,7 @@ namespace WebApiCrud.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class ProductosController : ControllerBase
     {
         private readonly IApiRepository _repo;
@@ -61,6 +62,8 @@ namespace WebApiCrud.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
         public async Task<IActionResult> Post(ProductoCreateDTO productoDTO)
         {
             //var productoToCreate = new Producto();
